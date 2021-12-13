@@ -1,3 +1,5 @@
+
+<html>
 <head>
 
 
@@ -33,9 +35,12 @@
 </head> 
 
 
-  @include('nav-footer/nav')
+  @include('nav-footer.nav')
 
 
 
 
-  @include('nav-footer/footer')
+  @include('nav-footer.footer')
+
+  
+</html>

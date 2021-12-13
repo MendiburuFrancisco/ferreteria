@@ -32,7 +32,8 @@ Route::get('/', function () {
    
   // Route::resource('/clientes',ClientesController::class) ->only('create');
  Route::get('/producto',[ProductosController::class,'index']);
- Route::get('/',[MainController::class,'index']);
+ //Route::get('/', function(){return view('main');});
+ Route::get('/','app\Http\Controllers\MainController@index');
  Route::get('/producto/create',[ProductosController::class,'create']);
  Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']);
  Route::post('/producto/{codigo}',[ProductosController::class,'store']);
