@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-       return view('welcome');
+        $texto = trim($request->get('textoBuscador'));
+        $productos =  DB::select("call devolverProductos('%".$texto."%');");
+        $parametros = [
+            "arrayProductos" => $productos,
+            "atributosProductos" => ["Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"]
+        ];
+
+       return view('index', $parametros);
     }
  
     public function create()

@@ -17,8 +17,8 @@
     
         
         <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-          <form class="col-md-10">
-            <input class="form-control" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
+          <form class="col-md-10" action="{{url('/')}}" method="GET">
+            <input class="form-control" name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
           </form>
        
 
