@@ -2,32 +2,34 @@
 
 
 <section class="container">
-     <h2>Todos los productos</h2>
+     <h2 class="py-4">Todos los productos</h2>
      <br>
      <br>
     <div class="row">
         <!-- FILTROS --> 
-        <div class="col-3">
-            
+        <div class="col-2 py-3">
+          <form action="{{url('tienda/filtrar')}}" method="get">
             <h4>Categorias</h3>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      nombre categoria 1
+              @foreach ($categorias as $categoria) 
+                <div class="form-check py-1">
+                    <input class="form-check-input" type="checkbox" value="true" id="{{$categoria->nombre}}" name="checkbox">
+                    <label class="form-check-label" for="{{$categoria->nombre}}">
+                      {{$categoria->nombre}}
                     </label>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                      nombre categoria 2
-                    </label>
-                  </div>
-
-
-            <h4>Precio</h3>
-            <input type="text" name="precioMin" id="precioMin" placeholder="mínimo" style="width: 90px"> 
-            <input type="text" name="precioMax" id="precioMax" placeholder="máximo" style="width: 90px" >
-            <button class="row">Aplicar filtros</button>
+                @endforeach 
+            <div class="py-2"> 
+              <h4>Precio</h3>
+              <div class="py-2"> 
+                <input type="text" name="precioMin" id="precioMin" placeholder="mínimo" style="width: 90px"> 
+                <input type="text" name="precioMax" id="precioMax" placeholder="máximo" style="width: 90px">
+              </div>
+            </div>
+            <div class="row py-1">
+              <button class="btn btn-outline-primary" type="submit">Aplicar filtros</button>
+            </div>
+           
+          </form>
         </div>
         <!-- /FILTROS --> 
 
@@ -35,7 +37,7 @@
 
 
         <!-- Productos --> 
-        <div class="col-9">
+        <div class="col">
             @include('producto.index',$arrayProductos)
         </div>
     </div>

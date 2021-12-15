@@ -44,7 +44,15 @@ class ProductosController extends Controller
  
     public function show($id)
     {
-        //
+        $producto = DB::table('producto')->where('codigo','=',$id)->get('*');
+        $producto = $producto->first(); 
+
+        $parametros = [
+            "producto" => $producto,
+            "atributosProductos" => ["Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"]
+        ];
+
+        return view("producto.show",$parametros); 
     }
 
   

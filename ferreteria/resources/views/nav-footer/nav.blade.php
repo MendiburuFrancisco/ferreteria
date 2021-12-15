@@ -17,17 +17,17 @@
     
         
         <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-          <form class="col-md-10" action="{{url('/')}}" method="GET">
+          <form class="col-md-10" action="{{url('tienda/filtrar')}}" method="GET">
             <input class="form-control" name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
           </form>
        
 
         
           <li class="nav-item ">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="{{url('/')}}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Tienda</a>
+            <a class="nav-link active" href="{{url('tienda')}}">Tienda</a>
           </li>
         
           <li class="nav-item dropdown">
@@ -50,10 +50,13 @@
             <a class="nav-link active" aria-current="page" href="#">Cuenta</a>
           </li>
          
-          <li class="nav-item" style="background-color: black; ">
+          <li class="nav-item" style="background-color: rgba(134, 129, 129, 0.15); ">
            <div class="navbar-nav me-0 mb-2 mb-sm-0">
-            <img src="laravel\ferreteria\icon\carrito.png" alt="" width="24" height="24" class="d-inline-block align-text-top">
-            <a class="nav-link active" aria-current="page" href="#">Carrito</a>
+           
+           <!-- <img src="laravel\ferreteria\icon\carrito.png" alt="" width="24" height="24" class="d-inline-block align-text-top">
+           -->
+           <i class="bi bi-cart-fill"></i>
+           <a class="nav-link active" aria-current="page" href="#">Carrito</a>
           </div>
            
           </li>
