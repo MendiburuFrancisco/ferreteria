@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,9 +36,12 @@ Route::get('/', function () {
  Route::get('/producto',[ProductosController::class,'index']);
  //Route::get('/', function(){return view('main');});
 // Route::get('/','app\Http\Controllers\MainController@index');
-Route::get('/',[MainController::class,'index']);
+Route::get('/',[InicioController::class,'index']);
+Route::get('/tienda',[MainController::class,'index']);
+Route::get('/tienda/filtrar',[MainController::class,'filtrar']);
 Route::get('/producto/create',[ProductosController::class,'create']);
  Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']);
+ Route::get('/producto/show/{codigo}',[ProductosController::class,'show']);
  Route::post('/producto/{codigo}',[ProductosController::class,'store']);
  Route::patch('/producto/{codigo}',[ProductosController::class,'update']);
  Route::delete('/producto/delete/{codigo}',[ProductosController::class,'destroy']);
