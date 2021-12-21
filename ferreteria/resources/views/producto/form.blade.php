@@ -7,26 +7,27 @@
             <div class="col-md-6">
               @if(isset($producto->imagen))
               
-              <img class="card-img-top mb-5 mb-md-0" src="{{asset('store').'/'.$producto->imagen  }}" alt="..." />
+              <img class="card-img-top mb-5 mb-md-0" src="{{asset('storage').'/'.$producto->imagen  }}" alt="..." />
              @endif   
-              <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." />
+             <!-- <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /> -->
                 {{isset($producto->imagen)? $producto->imagen : '' }}
                 <input type="file"  value="" name="imagen" id="imagen">
             </div>
             <div class="col-md-6">
-                <!-- MARCA DEL PRODUCTO -->
+                    <!-- NOMBRE DEL PRODUCTO   -->
+                    <label> Nombre </label>
+                    <h1 class="display-5 fw-bolder">
+                         <input type="text"  value="{{isset($producto->nombre)? $producto->nombre : '' }}" name="nombre" id="nombre">  
+                    </h1>
+                    <div>
+              <!-- MARCA DEL PRODUCTO -->
                 <div class="small mb-1"><label>Marca</label> <br>
                 <input type="text"  value="{{isset($producto->marca)?$producto->marca:''}}" name="marca" id="marca"> </div>
-                <!-- NOMBRE DEL PRODUCTO -->
-                <label> Nombre </label>
-                <h1 class="display-5 fw-bolder">
-                     <input type="text"  value="{{isset($producto->nombre)? $producto->nombre : '' }}" name="nombre" id="nombre">  
-                </h1>
-                <div>
+            
                     <label>Categoria</label>
                     <input type="text" value="{{isset($producto->categoria)?$producto->categoria : '' }}"  name="categoria" id="categoria"> 
                 </div>
-                <div class="fs-5 mb-5">
+                <div class="fs-5 mb-1">
                     <!-- PRECIO ACTUAL DEL PRODUCTO -->
                     <span>
                         <label>Precio $</label><input type="double"  value="{{isset($producto->precio)?$producto->precio : '' }}" name="precio" id="precio">

@@ -1,5 +1,6 @@
 
 
+
 <nav class="navbar navbar-expand-lg navbar-dark sticky-lg-top " aria-label="Third navbar example" style="background-color:#6279c8;">
  
     <div class="container-fluid col-md-10">
@@ -44,10 +45,14 @@
       
 
         </ul>
-       
+    
         <ul class="navbar-nav me-0 mb-2 mb-sm-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Cuenta</a>
+            <a class="nav-link active btn btn-success" 
+            aria-current="page" href="#" data-toggle="modal" 
+            data-target="#modal_container" id="open">
+            {{ (Session::get('nombre')!= null)? Session::get('nombre'): 'Cuenta';}}
+           </a>
           </li>
          
           <li class="nav-item" style="background-color: rgba(134, 129, 129, 0.15); ">
@@ -56,7 +61,7 @@
            <!-- <img src="laravel\ferreteria\icon\carrito.png" alt="" width="24" height="24" class="d-inline-block align-text-top">
            -->
            <i class="bi bi-cart-fill"></i>
-           <a class="nav-link active" aria-current="page" href="#">Carrito</a>
+           <a class="nav-link active" aria-current="page" href="{{url('/carrito')}}">Carrito</a>
           </div>
            
           </li>
@@ -65,3 +70,5 @@
       </div>
     </div>
   </nav>
+
+  @include('usuario.modal.create')

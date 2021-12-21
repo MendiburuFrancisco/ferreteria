@@ -67,7 +67,7 @@
             <div class="col align-self-left">
               <img
                 style="width: 600;  "
-                src="https://http2.mlstatic.com/D_NQ_NP_758115-MLA45347999721_032021-OO.webp"
+                src="{{url('storage/uploads/banner_pedi_retira.png')}}"
                 alt=""
               />
             </div>

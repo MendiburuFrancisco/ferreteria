@@ -42,8 +42,21 @@
   @include('nav-footer.nav')
   
   
-  @include('producto.show',$producto,$atributosProductos)
+ <section class="container">
+
+
+    @include('producto.show',['modo'=>'mostrar'])
+
+  </section>
   
-  
+  <section class="container">
+    
+    <div class="row mb-3"> 
+      <h4>Productos relacionados</h4>
+    </div>
+    <div class="row mb-5"> 
+     @include('producto.index',$arrayProductos)
+    </div>
+  </section>
   @include('nav-footer.footer')
   </html>

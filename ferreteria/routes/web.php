@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\SesionController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,17 +38,27 @@ Route::get('/', function () {
  Route::get('/producto',[ProductosController::class,'index']);
  //Route::get('/', function(){return view('main');});
 // Route::get('/','app\Http\Controllers\MainController@index');
+
+// RUTAS PARA LA TIENDA
 Route::get('/',[InicioController::class,'index']);
 Route::get('/tienda',[MainController::class,'index']);
 Route::get('/tienda/filtrar',[MainController::class,'filtrar']);
+
+// RUTAS PARA EL PRODUCTO
 Route::get('/producto/create',[ProductosController::class,'create']);
- Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']);
- Route::get('/producto/show/{codigo}',[ProductosController::class,'show']);
- Route::post('/producto/{codigo}',[ProductosController::class,'store']);
- Route::patch('/producto/{codigo}',[ProductosController::class,'update']);
- Route::delete('/producto/delete/{codigo}',[ProductosController::class,'destroy']);
+Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']);
+Route::get('/producto/show/{codigo}',[ProductosController::class,'show']);
+Route::post('/producto/{codigo}',[ProductosController::class,'store']);
+Route::patch('/producto/{codigo}',[ProductosController::class,'update']);
+Route::delete('/producto/delete/{codigo}',[ProductosController::class,'destroy']);
 
+// RUTAS PARA EL USUARIO
+Route::post('/sesion/login/', [SesionController::class, 'login']);
+Route::post('/sesion/registro/', [SesionController::class, 'registro']);
 
+// RUTAS PARA EL CARRITO
+Route::post('/carrito/agregar',[CarritoController::class,'agregarProducto']);
+Route::get('/carrito',[CarritoController::class,'index']);
 
 
  //Auth::routes();
