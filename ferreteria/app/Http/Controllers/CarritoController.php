@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use function PHPUnit\Framework\isNull;
+
 class CarritoController extends Controller
 {
     /**
@@ -18,11 +20,17 @@ class CarritoController extends Controller
         $idCliente = Session::get('id');
         $productosDelCarrito = DB::select('call devolverProductosDelCarrito('.$idCliente.')');
         $detallesDelProductoDelCarrito = DB::select(' call devolverDetallesDeProductosDelCarrito('.$idCliente.')');
+        
+       
+        
+
         $parametros = [
             "arrayProductos" => $productosDelCarrito,
             "detallesProductosDelCarrito" => $detallesDelProductoDelCarrito,
             "atributosProductos" => ["Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"]
         ];
+
+    
 
         return view('carrito.index',$parametros);
     }
@@ -47,6 +55,14 @@ class CarritoController extends Controller
 
        return redirect('/carrito');
 
+    }
+
+    public function realizarPedido()
+    {
+        $idCliente = Session::get('id');
+        DB::select('call realizarPedido('.$idCliente.')');
+
+        return redirect('/');
     }
 
     /**
@@ -110,8 +126,10 @@ class CarritoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function eliminarProducto($codigo)
     {
-        //
+        $idCliente = Session::get('id');
+        DB::select('call eliminarProducto('.$idCliente.','. $codigo.')');
+        return redirect('/carrito');
     }
 }

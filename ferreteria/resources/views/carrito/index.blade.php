@@ -44,15 +44,21 @@
   @include('nav-footer.nav')
   
   
-  
 
 
 
   
-    <div class="container p-3">
+    <div class="container p-3 my-5">
+        
+        <div class="row p-3 ml-3 mt-3 mb-1">
+          <h3>Carrito</h3>
+          <p style="color: gray">{{count($arrayProductos)}} productos agregados</p>
+        </div>
+
+
         <div class="row">
             <div class="col">
-                @include('producto.index',$arrayProductos)
+              @include('carrito.producto',$arrayProductos)  
             </div>
             <div class="col-4 p-3" >
                 <div class="shadow p-3 mb-5 bg-body rounded">
@@ -63,11 +69,14 @@
                    
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                           <div class="ms-2 me-auto">
-                            <div class="fw-bold">${{$item -> precio}}</div>
-                            {{$item -> nombre}}
+                            <div class="fw-bold">$ {{isset($item -> precio)? $item -> precio : '0' }}</div>
+                            {{isset($item -> nombre)? $item -> nombre : '' }}
                           </div>
-                          <span class="badge bg-primary rounded-pill">{{$item -> cantidad}}</span>
+                          <span class="badge bg-primary rounded-pill">{{isset($item -> cantidad)? $item -> cantidad : '0' }}</span>
                         </li>
+
+              
+                    
                     @endforeach
                     </ol>
                     <div class="row my-3">
@@ -75,13 +84,18 @@
                             <h3>Total:</h3>
                         </div>
                         <div class="col-9 ">
-                            <h2 class="text-right">${{$item -> total}}</h2>
+                            <h2 class="text-right">$ {{isset($item -> total)? $item -> total : '0' }}</h2>
+                            
                         </div>
                     </div>
+                    <form action="{{url('/carrito/realizarPedido')}}" method="get">
+                      @csrf
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary" type="button">Terminar pedido</button>  
+                       
+                        <button class="btn btn-primary" type="submit">Realizar pedido</button> 
+                      
                     </div> 
-                    
+                  </form> 
                 </div>
 
 

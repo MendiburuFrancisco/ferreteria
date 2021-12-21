@@ -26,9 +26,11 @@ class SesionController extends Controller
 
             Session::put('id',$clientes -> id_cliente);
             Session::put('nombre',$clientes ->   nombre);
+          
 
-            $inicio = new InicioController();
-           return $inicio-> index();
+            // $inicio = new InicioController();
+           // return $inicio-> index();
+           return redirect('/');
            }
         
         //return view ('usuario.modal.passyuser', $parametros);

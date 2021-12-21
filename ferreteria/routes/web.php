@@ -59,7 +59,8 @@ Route::post('/sesion/registro/', [SesionController::class, 'registro']);
 // RUTAS PARA EL CARRITO
 Route::post('/carrito/agregar',[CarritoController::class,'agregarProducto']);
 Route::get('/carrito',[CarritoController::class,'index']);
-
+Route::get('/carrito/realizarPedido',[CarritoController::class,'realizarPedido']);
+Route::delete('/carrito/eliminarProducto/{codigo}',[CarritoController::class,'eliminarProducto']);
 
  //Auth::routes();
 
