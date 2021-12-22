@@ -25,15 +25,10 @@ class SesionController extends Controller
            foreach ( $cliente as $clientes){
 
             Session::put('id',$clientes -> id_cliente);
-            Session::put('nombre',$clientes ->   nombre);
-          
-
-            // $inicio = new InicioController();
-           // return $inicio-> index();
+            Session::put('nombre',$clientes ->   nombre); 
            return redirect('/');
            }
-        
-        //return view ('usuario.modal.passyuser', $parametros);
+      
     }
     
     public function registro(Request $request)
@@ -51,69 +46,43 @@ class SesionController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function cerrarSesion()
     {
-        //
+        Session::flush();
+
+        return redirect('/');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+
+    public function historialPedidos()
+    { 
+        $idCliente = Session::get('id');
+        $pedidos = null; // deberia traer de la base de datos aquellos pedidos que sean del usuario en cuestion
+
+        return view('/sesion/pedidos');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function detallesCuenta()
+    { 
+        $idCliente = Session::get('id');
+        $cliente = null; // deberia traer el cliente de la base de datos o tomar los datos de Session::get para mostrarlos
+
+
+        return view('usuario.detalles');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function inicio()
+    { 
+    
+        return view('usuario.principal');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    // Esta funcion deberia guardar los cambios realizados en el perfil
+    // borrarla en caso de que el boton "Finalizar" sirva para otra cosa
+    public function guardarCambios()
     {
-        //
+
+        return redirect('/');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

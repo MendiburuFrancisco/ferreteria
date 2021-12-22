@@ -23,8 +23,14 @@
                 <div class="col">
                   <p class="card-text" style="font-size:24px;">{{$producto -> precio}}</p>
                 </div>
-                <div class="col">
+                <div class="col-1">
+                  <p class="card-text" style="font-size:24px;">x</p>
+                </div>
+                <div class="col-2">
                   <input type="text" name="cantidadProducto" style="width: 36px; height:36px; text-align:center" value="{{$producto -> cantidad}}">
+                </div>
+                <div class="col-1">
+                  <p class="card-text" style="font-size:24px;">=</p>
                 </div>
                
                 
@@ -49,8 +55,11 @@
           </form>
         </div>
         <div class="row">
-          <button type="button" class="btn btn-secondary"> <i class="bi bi-trash"></i>Modificar</button>
-         
+          <form action="{{url('/carrito/modificarProducto/'.$producto->codigo.'/'.$producto->cantidad)}}" method="post">
+            @csrf
+            @method('PATCH')
+          <button type="submit" class="btn btn-secondary"> <i class="bi bi-trash"></i>Modificar</button>
+        </form>
         </div>
       </div>
       </div>

@@ -132,4 +132,11 @@ class CarritoController extends Controller
         DB::select('call eliminarProducto('.$idCliente.','. $codigo.')');
         return redirect('/carrito');
     }
+
+    public function modificarProducto(Request $request, $codigo,$cantidad)
+    {
+        $idCliente = Session::get('id');
+        DB::select('call modificarPedido('.$idCliente.','. $codigo.','.$cantidad.')');
+        return redirect('/carrito');
+    }
 }

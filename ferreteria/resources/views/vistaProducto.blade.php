@@ -55,8 +55,11 @@
       <h4>Productos relacionados</h4>
     </div>
     <div class="row mb-5"> 
-     @include('producto.index',$arrayProductos)
+      @include('producto.index',$arrayProductos)
+ 
     </div>
   </section>
+ 
+
   @include('nav-footer.footer')
   </html>

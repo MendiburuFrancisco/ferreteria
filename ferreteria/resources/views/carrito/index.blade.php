@@ -39,7 +39,7 @@
    
       <link href="navbar.css" rel="stylesheet">
   </head> 
-  
+  <html>
   
   @include('nav-footer.nav')
   
@@ -48,7 +48,7 @@
 
 
   
-    <div class="container p-3 my-5">
+    <div class="container p-3 my-2">
         
         <div class="row p-3 ml-3 mt-3 mb-1">
           <h3>Carrito</h3>
@@ -90,6 +90,7 @@
                     </div>
                     <form action="{{url('/carrito/realizarPedido')}}" method="get">
                       @csrf
+                      
                     <div class="d-grid gap-2">
                        
                         <button class="btn btn-primary" type="submit">Realizar pedido</button> 

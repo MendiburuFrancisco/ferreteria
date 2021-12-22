@@ -44,15 +44,18 @@ class ProductosController extends Controller
  
     public function show($id)
     {
-        $producto = DB::table('producto')->where('codigo','=',$id)->get('*');
-        $producto = $producto->first(); 
-
+        $producto = DB::table('producto')->where('codigo','=',$id)->get('*')->firstOrFail();
+  
+        $productos = DB::select("SELECT * FROM producto WHERE categoria LIKE '".$producto->categoria."'");
+     
+       
         $parametros = [
             "producto" => $producto,
+            "arrayProductos" => $productos,
             "atributosProductos" => ["Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"]
         ];
 
-        return view("producto.show",$parametros); 
+        return view("vistaProducto",$parametros); 
     }
 
   
