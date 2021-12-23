@@ -34,7 +34,7 @@ Route::get('/producto/create',[ProductosController::class,'create']);
 Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']);
 Route::get('/producto/show/{codigo}',[ProductosController::class,'show']);
 Route::post('/producto/{codigo}',[ProductosController::class,'store']);
-Route::patch('/producto/{codigo}',[ProductosController::class,'update']);
+Route::patch('/producto/guardarCambios/{codigo}',[ProductosController::class,'update']);
 Route::delete('/producto/delete/{codigo}',[ProductosController::class,'destroy']);
 
 // RUTAS PARA EL USUARIO
@@ -53,6 +53,7 @@ Route::get('/carrito',[CarritoController::class,'index']);
 Route::get('/carrito/realizarPedido',[CarritoController::class,'realizarPedido']);
 Route::delete('/carrito/eliminarProducto/{codigo}',[CarritoController::class,'eliminarProducto']);
 Route::patch('/carrito/modificarProducto/{codigo}/{cantidad}',[CarritoController::class,'modificarProducto']);
+ 
 
  //Auth::routes();
 

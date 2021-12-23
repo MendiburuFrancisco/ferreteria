@@ -1,52 +1,52 @@
 <footer class="page-footer font-small blue pt-4" style="background-color: whitesmoke;">
   <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-left">
+  <div class="container-fluid pl-5 text-center text-md-left">
     <!-- Grid row -->
     <div class="row">
       <!-- Grid column -->
-      <div class="col-md-6 mt-md-0 mt-3">
+      <div class="col-md-6 mt-md-0 mt-3 text text-start">
         <!-- Content -->
-        <h5 class="text-uppercase">FERRETERIA LOREM IPSUM</h5>
+        <h5 class="text-uppercase">FERRETERIA IPSUM</h5>
         <p>Con nosotros vas a encontrar las mejores herramientas y productos del mercado.</p>
       </div>
       <!-- Grid column -->
       <hr class="clearfix w-100 d-md-none pb-3">
       <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3">
+      <div class="col-md-3 mb-md-0 mb-3  text text-start">
         <!-- Links -->
-        <h5 class="text-uppercase">Categorias</h5>
+        <h5 class="text-uppercase ">Pagina</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="#!">Inicio</a>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <a href="#!">Tienda</a>
           </li>
           <li>
-            <a href="#!">Link 3</a>
+            <a href="#!">Nosotros</a>
           </li>
           <li>
-            <a href="#!">Link 4</a>
+            <a href="#!">Otro</a>
           </li>
         </ul>
       </div>
       <!-- Grid column -->
       <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3">
+      <div class="col-md-3 mb-md-0 mb-3 text text-start">
         <!-- Links -->
         <h5 class="text-uppercase">Links de interés</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="#"><i class="bi bi-whatsapp"></i> Whatsapp</a>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <a href="#"><i class="bi bi-twitter"></i> Twitter</a>
           </li>
           <li>
-            <a href="#!">Link 3</a>
+            <a href="#"><i class="bi bi-facebook"></i> Facebook</a>
           </li>
           <li>
-            <a href="#!">Link 4</a>
+            <a href="#"><i class="bi bi-instagram"></i> Instagram</a>
           </li>
         </ul>
       </div>

@@ -42,90 +42,34 @@ class CarritoController extends Controller
 
        $idCliente = Session::get('id');
         # `agregarProducto`(id_cliente int(11), codigo_producto int(11), cantidad_producto int(5))
-        DB::select('call agregarProducto('.$idCliente.','. $codigoDelProducto .','.$cantidadDelProducto.')');
-
-       /**$productosDelCarrito = DB::select('call devolverProductosDelCarrito('.$idCliente.')');
-
-       $parametros = [
-           "arrayProductos" => $productosDelCarrito,
-           "atributosProductos" => ["Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"]
-       ];
-       
-       return view('carrito.index',$parametros); **/
-
-       return redirect('/carrito');
+        DB::select('call agregarProducto('.$idCliente.','. $codigoDelProducto .','.$cantidadDelProducto.')');  
+        return redirect('/carrito');
 
     }
 
     public function realizarPedido()
     {
         $idCliente = Session::get('id');
+  
+
+        $detallesDelProductoDelCarrito = DB::select(' call devolverDetallesDeProductosDelCarrito('.$idCliente.')');
+        $id_compra = $detallesDelProductoDelCarrito[0] -> id_compra;
+        $detalleCompra = DB::select(' call devolverDetalleCompra('. $id_compra.')');
+        $apellidoYnombre = $detalleCompra[0] -> apellidoYnombre;
+        $fecha_hora = $detalleCompra[0] -> fecha_hora;
+
         DB::select('call realizarPedido('.$idCliente.')');
+        $parametros = [ 
+            "detalleCompra" => $detalleCompra,
+            "id_compra" => $id_compra,
+            "fecha_hora" => $fecha_hora,
+            "apellidoYnombre" => $apellidoYnombre
+        ];
 
-        return redirect('/');
+        return view('carrito.ticket',$parametros);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function eliminarProducto($codigo)
     {
         $idCliente = Session::get('id');
@@ -135,7 +79,7 @@ class CarritoController extends Controller
 
     public function modificarProducto(Request $request, $codigo,$cantidad)
     {
-        $idCliente = Session::get('id');
+        $idCliente = Session::get('id'); 
         DB::select('call modificarPedido('.$idCliente.','. $codigo.','.$cantidad.')');
         return redirect('/carrito');
     }
