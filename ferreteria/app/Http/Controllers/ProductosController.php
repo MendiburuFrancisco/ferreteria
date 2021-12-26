@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
  
 
@@ -12,7 +13,11 @@ class ProductosController extends Controller
      
     public function index()
     {
-        $productos = DB::select("SELECT * FROM producto");
+    
+        $productos = DB::select("SELECT * FROM producto ORDER BY precio DESC");
+
+   
+
         $parametros = [
             "arrayProductos" => $productos,
             "atributosProductos" => ["Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"]
@@ -24,7 +29,7 @@ class ProductosController extends Controller
  
     public function create()
     {
-        return view('producto.create');
+        return redirect('/tienda');
     }
 
   
@@ -73,13 +78,15 @@ class ProductosController extends Controller
          $datosProducto = $request->except(['_method','_token']);
 
          if($request -> hasFile('imagen')){
-            
-            Storage::delete('public/'.$datosProducto['imagen']);
-            $productoNuevo['imagen']=$request->file('imagen') ->store('uploads','public');
+            if( $request->file('imagen') != 'uploads/error-imagen.png') {
+                Storage::delete('public/'.$datosProducto['imagen']);
+            }
+            $datosProducto['imagen']=$request->file('imagen') ->store('uploads','public');
         }
 
          DB::table('producto')->where('codigo','=',$codigo)->update($datosProducto);
         
+         return redirect('/tienda');
       
     }
 
@@ -96,5 +103,12 @@ class ProductosController extends Controller
         
 
         return redirect('producto');
+    }
+
+    public function cambiarEstado($codigo)
+    {
+        DB::SELECT('call cambiarEstadoProducto('.$codigo.')');
+
+        return redirect('/tienda');
     }
 }

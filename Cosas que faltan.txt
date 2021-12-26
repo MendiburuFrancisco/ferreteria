@@ -1,0 +1,8 @@
+* Falta validacion en carrito ( al momento de apretar el boton cuando esté el carrito vacio tiene que pasar no tendria que poder) 
+* Falta arreglar las imagenes
+* Falta el ABM de los productos
+* Falta la pantalla del historial de pedidos --> falta que del historial de pedidos pueda buscar un pedido en especifico y ver los productos solicitados.
+					     --> eliminar pedidos 
+					     --> modificar pedidos ?? 
+* Falta pantalla de "nosotros"
+* Al eliminar un producto hace falta un cartel modal que pregunte si realmente está seguro de eliminar el producto

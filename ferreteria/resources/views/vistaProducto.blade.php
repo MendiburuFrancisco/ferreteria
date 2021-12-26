@@ -40,12 +40,15 @@
   
   
   @include('nav-footer.nav')
-  
-  
- <section class="container">
-
-
+  <section class="container">
+    
+    
+    @if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+    @include('producto.edit',['modo'=>'editar'])
+    @else
     @include('producto.show',['modo'=>'mostrar'])
+    @endif
+
 
   </section>
   

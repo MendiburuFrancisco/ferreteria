@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\SesionController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\PedidosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,7 @@ Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']);
 Route::get('/producto/show/{codigo}',[ProductosController::class,'show']);
 Route::post('/producto/{codigo}',[ProductosController::class,'store']);
 Route::patch('/producto/guardarCambios/{codigo}',[ProductosController::class,'update']);
+Route::patch('/producto/cambiarEstado/{codigo}',[ProductosController::class,'cambiarEstado']);
 Route::delete('/producto/delete/{codigo}',[ProductosController::class,'destroy']);
 
 // RUTAS PARA EL USUARIO
@@ -54,6 +56,11 @@ Route::get('/carrito/realizarPedido',[CarritoController::class,'realizarPedido']
 Route::delete('/carrito/eliminarProducto/{codigo}',[CarritoController::class,'eliminarProducto']);
 Route::patch('/carrito/modificarProducto/{codigo}/{cantidad}',[CarritoController::class,'modificarProducto']);
  
+
+//RUTAS PARA LOS PEDIDOS REALIZADOS
+
+Route::get('/pedidos',[PedidosController::class,'index']);
+
 
  //Auth::routes();
 

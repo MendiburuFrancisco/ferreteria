@@ -1,52 +1,59 @@
 
-@if (!Session::get('nombre') !== null && Session::get('nombre') == 'admin')
-<nav class="navbar navbar-expand-lg navbar-dark sticky-lg-top " aria-label="Third navbar example" style="background-color:#6279c8;">
-  <div class="container-fluid col-md-10">
-    <a class="navbar-brand" href="{{url('/')}}">
-      <img src="https://i0.wp.com/colindustria.com/wp-content/uploads/2015/04/cropped-iconos-14-1.png?ssl=1" alt="" width="30" height="30" class="d-inline-block align-text-top"> Ferretería </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <form class="col-md-4" action="{{url('tienda/filtrar')}}" method="GET">
-      <input class="form-control" name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
-    </form>
-    <div class="collapse navbar-collapse" id="navbarsExample03">
-      <ul class="navbar-nav me-auto  mb-sm-0">
-          <li class="nav-item ">
-            <a class="nav-link active" aria-current="page" href="{{url('/')}}">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{url('tienda')}}">Editar Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" style="width: 200px" href="{{url('tienda')}}">Ver pedidos</a>
-          </li>
+@if (Session::get('nombre') !== null && Session::get('nombre') == 'admin')
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-lg-top " aria-label="Third navbar example" style="background-color:#6279c8;">
+    <div class="container-fluid col-md-10">
+      <a class="navbar-brand" href="{{url('/')}}">
+        <img src="https://i0.wp.com/colindustria.com/wp-content/uploads/2015/04/cropped-iconos-14-1.png?ssl=1" alt="" width="30" height="30" class="d-inline-block align-text-top"> Ferretería </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <form class="col-md-4" action="{{url('tienda/filtrar')}}" method="GET">
+        <input class="form-control" name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
+      </form>
+      <div class="collapse navbar-collapse" id="navbarsExample03">
+        <ul class="navbar-nav me-auto  mb-sm-0">
+            <li class="nav-item ">
+              <a class="nav-link active" aria-current="page" href="{{url('/')}}">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{url('tienda')}}">Editar Productos</a>
+            </li>
+            <li class="nav-item position-relative">
+              
+              <a class="nav-link active " style="" href="{{url('pedidos')}}">Ver pedidos
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  5 
+                  <span class="visually-hidden">pedidos sin entregar</span>
+                </span>
+              </a>
+            
+            </li>
+            
+        </ul>
+        <ul class="navbar-nav me-0 mb-1 mb-sm-0"> 
           
-      </ul>
-      <ul class="navbar-nav me-0 mb-1 mb-sm-0"> 
-        
-        @if(Session::get('nombre')!= null) 
-        
-          <li class="nav-item">
-            <a class="nav-link active btn btn-success" aria-current="page" href="{{ url ( '/sesion/principal' )}}">
-              {{Session::get('nombre')}}
-            </a>
-          <li class="nav-item">
-            <a class="nav-link active btn btn-success" aria-current="page" href="{{ url ( '/sesion/salir' )}}" style="margin-left: 10px"> Logout </a>
-          </li>
-          </li> 
+          @if(Session::get('nombre')!= null) 
+          
+            <li class="nav-item">
+              <a class="nav-link active btn btn-success" aria-current="page" href="{{ url ( '/sesion/principal' )}}">
+                {{Session::get('nombre')}}
+              </a>
+            <li class="nav-item">
+              <a class="nav-link active btn btn-success" aria-current="page" href="{{ url ( '/sesion/salir' )}}" style="margin-left: 10px"> Logout </a>
+            </li>
+            </li> 
 
+            
           
+          @else <li class="nav-item">
+              <a class="nav-link active btn btn-success" aria-current="page" href="#" data-toggle="modal" data-target="#modal_container" id="open"> Cuenta </a>
+            </li> 
+          @endif 
         
-        @else <li class="nav-item">
-            <a class="nav-link active btn btn-success" aria-current="page" href="#" data-toggle="modal" data-target="#modal_container" id="open"> Cuenta </a>
-          </li> 
-        @endif 
-      
-      </ul>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav> @include('usuario.modal.create')
+  </nav> @include('usuario.modal.create')
 @else
   <nav class="navbar navbar-expand-lg navbar-dark sticky-lg-top " aria-label="Third navbar example" style="background-color:#6279c8;">
     <div class="container-fluid col-md-10">

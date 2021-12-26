@@ -11,10 +11,10 @@
       </div>
       @if ( (Session::get('nombre') !== null && Session::get('nombre') == 'admin'))
       <div class="col">
-        <button class="btn btn-success">
+        <a class="btn btn-success" type="button" href="{{url('/producto/create')}}">
           <i class="bi bi-plus-circle"></i>
           Agregar nuevo producto
-        </button> 
+        </a> 
       </div>
       @endif
       
@@ -28,7 +28,7 @@
             <h4>Categorias</h3>
               @foreach ($categorias as $categoria) 
                 <div class="form-check py-1">
-                    <input class="form-check-input" type="checkbox" value="true" id="{{$categoria->nombre}}" name="checkbox">
+                    <input class="form-check-input" type="checkbox" value="{{$categoria->nombre}}" id="{{$categoria->nombre}}" name="checkbox">
                     <label class="form-check-label" for="{{$categoria->nombre}}">
                       {{$categoria->nombre}}
                     </label>
