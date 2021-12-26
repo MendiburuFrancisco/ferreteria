@@ -159,7 +159,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | HTTPS Only Cookies
+    | HTTPS Only Cookies 
     |--------------------------------------------------------------------------
     |
     | By setting this option to true, session cookies will only be sent back

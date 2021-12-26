@@ -40,10 +40,29 @@
   
   
   @include('nav-footer.nav')
+  <section class="container">
+    
+    
+    @if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+    @include('producto.edit',['modo'=>'editar'])
+    @else
+    @include('producto.show',['modo'=>'mostrar'])
+    @endif
+
+
+  </section>
   
-  
-  @include('producto.show',$producto,$atributosProductos)
-  
-  
+  <section class="container">
+    
+    <div class="row mb-3"> 
+      <h4>Productos relacionados</h4>
+    </div>
+    <div class="row mb-5"> 
+      @include('producto.index',$arrayProductos)
+ 
+    </div>
+  </section>
+ 
+
   @include('nav-footer.footer')
   </html>

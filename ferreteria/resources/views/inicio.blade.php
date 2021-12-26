@@ -58,27 +58,35 @@
       </div>
   
       <div class="row">
-        @include('producto.index',$arrayProductos)
+        
+        <section class="d-flex justify-content-center">
+          @include('producto.index',$arrayProductos)
+        </section>
+     
       </div>
   
       <div class="row mt-5">
         <div class="container">
-          <div class="row  d-flex justify-content-between">
-            <div class="col align-self-left">
-              <img
-                style="width: 600;  "
-                src="https://http2.mlstatic.com/D_NQ_NP_758115-MLA45347999721_032021-OO.webp"
-                alt=""
-              />
+         
+            <div class="row">
+               <section class="d-flex justify-content-center">
+                  <div class="col align-self-left">
+                    <img
+                      style="width: 600;  "
+                      src="{{url('storage/uploads/banner_pedi_retira.png')}}"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col align-self-end">
+                    <img
+                      style="width: 600;"
+                      src="https://http2.mlstatic.com/D_NQ_NP_758115-MLA45347999721_032021-OO.webp"
+                      alt=""
+                    />
+                  </div>
+               </section>
             </div>
-            <div class="col align-self-end">
-              <img
-                style="width: 600;"
-                src="https://http2.mlstatic.com/D_NQ_NP_758115-MLA45347999721_032021-OO.webp"
-                alt=""
-              />
-            </div>
-          </div>
+       
         </div>
       </div>
 
