@@ -27,6 +27,7 @@ class CarritoController extends Controller
         $parametros = [
             "arrayProductos" => $productosDelCarrito,
             "detallesProductosDelCarrito" => $detallesDelProductoDelCarrito,
+            "modo" => 'realizar',
             "atributosProductos" => ["Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"]
         ];
 
@@ -77,10 +78,25 @@ class CarritoController extends Controller
         return redirect('/carrito');
     }
 
-    public function modificarProducto(Request $request, $codigo,$cantidad)
+    public function modificarProducto(Request $request, $codigo)
     {
-        $idCliente = Session::get('id'); 
-        DB::select('call modificarPedido('.$idCliente.','. $codigo.','.$cantidad.')');
-        return redirect('/carrito');
+        
+        // debo devolver el idCliente de la base de datos de la compra y compararlo para ver si es el que quiere modificar sus cosas
+        if(Session::get('nombre')!= null )
+        {
+           
+             
+                    $cantidad = $request ->get('cantidadProducto');
+                    $idCliente = Session::get('id'); 
+                     DB::select('call modificarPedido('.$idCliente.','. $codigo.','.$cantidad.')');
+                   
+                    return back();
+          
+        } else 
+        {
+            return view('error_permisos');
+        }
     }
+
+  
 }

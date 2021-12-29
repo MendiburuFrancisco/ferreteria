@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 // RUTAS VARIAS
    Route::get('/clientes', [ClientesController::class,'index']);
    Route::post('/registro', [ClientesController::class,'store']);
+   Route::get('/nosotros', [InicioController::class,'nosotros']);
  
  
 // RUTAS PARA LA TIENDA
@@ -31,13 +32,13 @@ Route::get('/tienda/filtrar',[MainController::class,'filtrar']);
 
 // RUTAS PARA EL PRODUCTO
 Route::get('/producto',[ProductosController::class,'index']);
-Route::get('/producto/create',[ProductosController::class,'create']);
-Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']);
+Route::get('/producto/create',[ProductosController::class,'create']); // ******************
+Route::get('/producto/edit/{codigo}',[ProductosController::class,'edit']); // ******************
 Route::get('/producto/show/{codigo}',[ProductosController::class,'show']);
 Route::post('/producto/{codigo}',[ProductosController::class,'store']);
-Route::patch('/producto/guardarCambios/{codigo}',[ProductosController::class,'update']);
-Route::patch('/producto/cambiarEstado/{codigo}',[ProductosController::class,'cambiarEstado']);
-Route::delete('/producto/delete/{codigo}',[ProductosController::class,'destroy']);
+Route::patch('/producto/guardarCambios/{codigo}',[ProductosController::class,'update']); // ******************
+Route::patch('/producto/cambiarEstado/{codigo}',[ProductosController::class,'cambiarEstado']); // ******************
+Route::delete('/producto/delete/{codigo}',[ProductosController::class,'destroy']); // ******************
 
 // RUTAS PARA EL USUARIO
 Route::post('/sesion/login/', [SesionController::class, 'login']);
@@ -47,20 +48,23 @@ Route::get('/sesion/principal', [SesionController::class, 'inicio']);
 Route::get('/sesion/detalles', [SesionController::class, 'detallesCuenta']);
 Route::get('/sesion/pedidos/', [SesionController::class, 'historialPedidos']);
 Route::post('/sesion/guardarCambios',[SesionController::class, 'guardarCambios']);
-
+Route::get('/sesion/detallecompra/{codigo}', [SesionController::class, 'detallesCompra']);
 
 // RUTAS PARA EL CARRITO
-Route::post('/carrito/agregar',[CarritoController::class,'agregarProducto']);
-Route::get('/carrito',[CarritoController::class,'index']);
-Route::get('/carrito/realizarPedido',[CarritoController::class,'realizarPedido']);
-Route::delete('/carrito/eliminarProducto/{codigo}',[CarritoController::class,'eliminarProducto']);
-Route::patch('/carrito/modificarProducto/{codigo}/{cantidad}',[CarritoController::class,'modificarProducto']);
+Route::post('/carrito/agregar',[CarritoController::class,'agregarProducto']); // ******************
+Route::get('/carrito',[CarritoController::class,'index']); // ******************
+Route::post('/carrito/realizarPedido',[CarritoController::class,'realizarPedido']); // ******************
+Route::delete('/carrito/eliminarProducto/{codigo}',[CarritoController::class,'eliminarProducto']); // ******************
+Route::patch('/carrito/modificarProducto/{codigo}',[CarritoController::class,'modificarProducto']); // ******************
  
 
 //RUTAS PARA LOS PEDIDOS REALIZADOS
 
 Route::get('/pedidos',[PedidosController::class,'index']);
-
+Route::get('/pedidos/eliminar/{codigo}',[PedidosController::class,'eliminar']); /*** TIPO DELETE ROUTE::DELETE */
+Route::get('/pedidos/mostrar/{codigo}',[PedidosController::class,'mostrar']);
+Route::patch('/pedidos/modificar/{codigo}',[PedidosController::class,'modificar']);
+Route::delete('/pedidos/eliminarProducto/{codigo}',[PedidosController::class,'eliminarProducto']); 
 
  //Auth::routes();
 

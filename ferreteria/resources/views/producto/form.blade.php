@@ -42,7 +42,7 @@
 
                             <p class="lead">
 
-                                <textarea readonly name="descripcion" id="descripcion" cols="59"
+                                <textarea readonly class="form-control" name="descripcion" id="descripcion" cols="59"
                                     rows="10">{{ isset($producto->descripcion)?$producto->descripcion : '' }}</textarea>
 
                             </p>

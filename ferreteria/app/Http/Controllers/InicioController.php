@@ -32,4 +32,10 @@ class InicioController extends Controller
     }
 
 
+    public function nosotros()
+    {
+        return view('nosotros');
+    }
+
+
 }

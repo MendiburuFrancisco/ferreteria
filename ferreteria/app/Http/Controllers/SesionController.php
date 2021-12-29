@@ -57,11 +57,49 @@ class SesionController extends Controller
     public function historialPedidos()
     { 
         $idCliente = Session::get('id');
-        $pedidos = null; // deberia traer de la base de datos aquellos pedidos que sean del usuario en cuestion
 
-        return view('/sesion/pedidos');
+        $arraycl = DB::SELECT ("SELECT * FROM compra WHERE id_cliente LIKE '".$idCliente."' ");
+        
+        $parametro = [ 
+            "pedidos" => $arraycl
+                ];
+
+        // $pedidos = null; // deberia traer de la base de datos aquellos pedidos que sean del usuario en cuestion
+
+        return view('usuario.pedidos', $parametro );
     }
 
+
+    public function detallesCompra($codigo)
+    {
+        $modo = 'historial';
+        $arraydp = DB::SELECT (" SELECT p.codigo, p.nombre, 
+        p.marca, p.precio, p.imagen, p.categoria, dc.subtotal, dc.cantidad
+        FROM compra c
+            INNER JOIN detalle_compra dc
+                ON c.id_compra = dc.id_compra
+            INNER JOIN producto p 
+                ON dc.id_producto = p.codigo
+        WHERE c.id_compra =" .$codigo);
+
+        $arraydc = DB::SELECT ("SELECT c.id_compra, 
+        dc.subtotal,dc.cantidad,p.precio,p.nombre,c.total, c.id_cliente,p.codigo
+        FROM detalle_compra dc
+            INNER JOIN compra c
+                ON dc.id_compra = c.id_compra
+            INNER JOIN producto p 
+                ON p.codigo = dc.id_producto
+            AND c.id_compra = " .$codigo);
+
+            $parametros = [
+                "arrayProductos" => $arraydp,
+                "detallesProductosDelCarrito" => $arraydc,
+                "modo" => $modo
+            ];
+
+        return view( 'carrito.index', $parametros);
+    }
+    
     public function detallesCuenta()
     { 
         $idCliente = Session::get('id');

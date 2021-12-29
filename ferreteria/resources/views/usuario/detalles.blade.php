@@ -8,9 +8,7 @@
    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbars/">  
   <!-- SCRIPT PARA PODER OCUPAR LAS FUNCIONALIDADES DEL NAV-->
   <!-- <script src="bootstrap-5.1.3-examples\assets\dist\js\bootstrap.bundle.min.js""></script> -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script src="{{ asset('js/app.js') }}" defer></script>
-  
+  <link href="../resources/css/cuenta.css" rel="stylesheet">
 
   <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,12 +29,19 @@
     }
   </style>  
       <style>
+        a{
+        text-decoration: none !important;
+       }
+
+      i{
+        font-size:18px;
+      }
         .container-1 {
         padding-top: 8rem;
         padding-bottom: 6rem;
         }
     
-        i:focus, i:hover, ped:focus, ped:hover, di:focus, di:hover, det:focus, det:hover, a:hover, a:focus{
+        i:focus, i:hover{
             color:#fc5f5f;
             text-decoration: none;
         }
@@ -59,12 +64,12 @@
             margin: auto auto auto;
           }
     
-          #inicio, #pedidos, #direcciones, #detalles, #finalizar{
+          #inicio, #pedidos, #detalles, #finalizar{
             background-color: aliceblue;
             font-family: 'Poppins', sans-serif;
             font-style:normal;
             display: block;
-            border: solid #fc5f5f 0.5px;
+            border: solid #d4d3d3 0.5px;
             padding: 10px 0 10px;
             margin: 5px auto;
           }
@@ -72,27 +77,20 @@
           .col-sm-8{
             display: inline-block;
             overflow: hidden;
+            padding-top:15px;
           }
     
           .col-sm-8 label{
             font-weight:bold ;
             display: block;
+            font-size:17px;
           }
     
           .col-sm-8 form .required {
             color: red;
             border: 0;
-            display: block;
           }
     
-          .col-sm-8 .col p {
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-          }
-    
-    
-    
-         
     </style>
     
 
@@ -111,31 +109,34 @@
         @include('usuario.menu')
 
           <div class="col-sm-8">
-            <form action= " " method="POST" class= "inline-form">
+            <form action= " " method="POST" >
               <div class='row'>
                 <div class='col-sm-5 form-group'>
-                  <label> Nombre <span class='required'>*</span></label>
-                  <input  id='nombre' type= "text" value='{{ Session::reflash('nombre') }}' readonly onmousedown="return false;" />
+                  <label> Nombre <span class='required' aria-hidden="true">*</span></label>
+                  <input class="form-control" type= "text" value='{{ Session::get('nombre') }}' 
+                  readonly onmousedown="return false;" />
                 </div>
 
                 <div class= 'col-sm-5 form-group'> 
                   <label> Apellido <span class="required">*</span></label>
-                  <input id='apellido' type= "text" value= '{{ Session::reflash('apellido') }}' readonly onmousedown="return false;" />
+                  <input  type= "text" class="form-control"  value= '{{ Session::get('apellido') }}'
+                   readonly onmousedown="return false;" />
                 </div>
               </div>
 
               <div class='row'>
                 <div class= 'col-sm-5 form-group'> 
                   <label> Usuario <span class="required">*</span></label>
-                  <input  type= "text" value= '{{ Session::reflash('usuario') }}' readonly onmousedown="return false;" />
+                  <input  class="form-control" type= "text" value= '{{ Session::get('usuario') }}'
+                   readonly onmousedown="return false;" />
                 </div>
 
                 <div class= 'col-sm-5 form-group'> 
                   <label> Email <span class="required">*</span></label>
-                  <input type= "text" value= '{{ Session::reflash('email') }}' readonly onmousedown="return false;" />
+                  <input class="form-control" type= "text" value= '{{ Session::get('email') }}'
+                   readonly onmousedown="return false;" />
                 </div>
               </div>
-
             </form>
           </div>   
     </div>

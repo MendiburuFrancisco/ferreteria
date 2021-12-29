@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Inicio</title>
+  
 
    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbars/">  
   <!-- SCRIPT PARA PODER OCUPAR LAS FUNCIONALIDADES DEL NAV-->
@@ -36,10 +37,18 @@
       padding-bottom: 6rem;
       }
 
-      i:focus, i:hover, ped:focus, ped:hover, di:focus, di:hover, det:focus, det:hover, a:hover, a:focus{
-          color:#fc5f5f;
-          text-decoration: none;
+       a{
+        text-decoration: none !important;
+       }
+
+      i{
+        font-size:18px;
       }
+
+      i:focus, i:hover, #ped:focus, #ped:hover{
+          color:#ff0000;
+      }
+
       #op{
         margin-right: 0px;
       }
@@ -59,12 +68,12 @@
           margin: auto auto auto;
         }
 
-        #inicio, #pedidos, #direcciones, #detalles, #finalizar{
+        #inicio, #pedidos, #detalles, #finalizar{
           background-color: aliceblue;
           font-family: 'Poppins', sans-serif;
           font-style:normal;
           display: block;
-          border: solid #fc5f5f 0.5px;
+          border: solid #d4d3d3 0.5px;
           padding: 10px 0 10px;
           margin: 5px auto;
         }
@@ -72,6 +81,7 @@
         .col-sm-8{
           display: inline-block;
           overflow: hidden;
+          
         }
 
         .col-sm-8 label{
@@ -87,11 +97,14 @@
 
         .col-sm-8 .col p {
           font-family: 'Poppins', sans-serif;
+          font-weight: lighter;
+          font-size: 19px;
+
+        }
+        .col-sm-8 .col span{
           font-weight: bold;
         }
-
-
-
+        
       
   </style>
 
@@ -104,12 +117,13 @@
     <div class="container-1 row" id="op"> 
             @include('usuario.menu')   
             
-            <div class="col-sm-8" id="parrafo"> 
-              <div class = "col"> 
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum qui modi, natus quibusdam enim alias architecto doloribus   </p>
+            <div class="col-sm-8"> 
+              <div class = "col" id="parrafo"> 
+                <p>Hola <span> {{(Session::get('usuario'))}} </span> (¿No eres <span> {{(Session::get('usuario'))}}</span>? 
+                  <a id="ped" href ="{{url( '/sesion/guardarCambios' )}}"> Cerra Sesión </a> ) </p>
                 <ul>
-                  <li><h3 style="justify-content:center;"> Lorem impsum </h3></li>
-                  <li></li>
+                  <li><p>Desde el escritorio de tu cuenta puedes ver tus <a id="ped" href = "{{url( '/sesion/pedidos' )}}">pedidos recientes</a>,
+                      <a id="ped" href="{{url('sesion/detalles')}}"> y los detalles de tu cuenta.</a></p></li>
                 </ul>
               </div>
               

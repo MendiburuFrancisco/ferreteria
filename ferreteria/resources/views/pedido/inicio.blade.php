@@ -42,7 +42,7 @@
   
   
   @include('nav-footer.nav')
-  @if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+  
  <section class="container py-3">
       <div class="row">
         <h3>Pedidos</h3>
@@ -72,7 +72,7 @@
                 <td>{{$pedido ->fecha_hora}}</td>
                 <td class="text text-end">${{$pedido ->total}}</td>
                 <td class="text text-end">
-                     <a class="btn btn-primary" href="{{url('/pedidos/ver/'.$pedido->id_compra)}}">
+                     <a class="btn btn-primary" href="{{url('/pedidos/mostrar/'.$pedido->id_compra)}}">
                       <i class="bi bi-bag"></i> Ver
                       </a>
                 </td>
@@ -91,9 +91,7 @@
        
     
  </section>
-  @else
-  @include('error_permisos')
-  @endif
+
   
   @include('nav-footer.footer')
   </html>

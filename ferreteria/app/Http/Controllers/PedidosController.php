@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class PedidosController extends Controller
 {
-
+ 
 
 
     /**
@@ -19,13 +20,19 @@ class PedidosController extends Controller
      */
     public function index()
     {
-       $pedidos = DB::SELECT('call devolverPedidosRealizados()');
+        if(Session::get('nombre')!= null && Session::get('nombre') == 'admin')
+        { 
+            $pedidos = DB::SELECT('call devolverPedidosRealizados()');
 
-       $parametros = [
-        'pedidos' => $pedidos
-       ];
+            $parametros = [
+                'pedidos' => $pedidos
+            ];
 
-       return view('pedido.inicio', $parametros);
+            return view('pedido.inicio', $parametros);
+        } else
+        {
+            return view('error_permisos');
+        }
     }
 
     /**
@@ -55,9 +62,38 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function mostrar($codigo)
     {
-        //
+        if(Session::get('nombre')!= null && Session::get('nombre') == 'admin')
+        {
+            $productosDelCarrito = DB::select('call devolverCarritoRealizado('.$codigo.')');
+            $detallesDelProductoDelCarrito = DB::select(' call devolverDetalleCarritoRealizado('.$codigo.')');
+            if(Session::get('idCompra') == null)
+            {
+                Session::put('idCompra',$codigo);
+
+            }
+            else
+            {
+                //Session::forget('idCompra');
+                Session::remove('idCompra');
+                Session::put('idCompra',$codigo);
+           
+            }
+            $parametros = 
+            [
+                "arrayProductos" => $productosDelCarrito,
+                "detallesProductosDelCarrito" => $detallesDelProductoDelCarrito, 
+                "modo" => 'finalizar'
+            ];
+    
+            return view('carrito.index',$parametros);
+
+        } else
+        {
+            return view('error_permisos');
+        }
+
     }
 
     /**
@@ -89,8 +125,44 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function eliminar($codigo)
     {
-        //
+       
+
+        if(Session::get('nombre')!= null && Session::get('nombre') == 'admin')
+        {
+            DB::table('detalle_compra')->where('id_compra','=', $codigo)->delete();
+            DB::table('compra')->where('id_compra','=', $codigo)->delete();
+    
+            return redirect('/pedidos');
+
+        } else
+        {
+            return view('error_permisos');
+        }
+
     }
+
+    public function modificar(Request $request, $codigo)
+    {
+        if(Session::get('nombre')!= null && Session::get('nombre') ==  'admin' )
+        {
+            $cantidad = $request ->get('cantidadProducto');
+     
+            DB::select('call modificarPedidoRealizado('.Session::get('idCompra'). ','. $codigo.','.$cantidad.')');
+               
+            return back();
+        } else
+        {
+            return view('error_permisos');
+        }
+    }
+
+    public function eliminarProducto($codigo)
+    {
+        DB::select('call eliminarProductoDePedido('.Session::get('idCompra').','. $codigo.')');
+        return back();
+    }
+ 
+
 }
