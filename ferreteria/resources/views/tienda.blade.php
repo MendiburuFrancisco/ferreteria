@@ -7,7 +7,7 @@
     
     <div class="col">
         <h2>Todos los productos</h2>
-        <p>Se han encontrado {{count($arrayProductos)}} productos</p>
+        <p style="color: gray">Se han encontrado {{count($arrayProductos)}} productos</p>
       </div>
       @if ( (Session::get('nombre') !== null && Session::get('nombre') == 'admin'))
       <div class="col">
@@ -28,7 +28,12 @@
             <h4>Categorias</h3>
               @foreach ($categorias as $categoria) 
                 <div class="form-check py-1">
-                    <input class="form-check-input" type="checkbox" value="{{$categoria->nombre}}" id="{{$categoria->nombre}}" name="checkbox">
+                  @if ( isset($categoriasSeleccionadas) && array_search($categoria->nombre,$categoriasSeleccionadas))
+                  <input checked class="form-check-input" type="checkbox" value="{{$categoria->nombre}}" id="{{$categoria->nombre}}" name="checkbox {{$categoria->nombre}}">
+                      
+                  @else
+                  <input class="form-check-input" type="checkbox" value="{{$categoria->nombre}}" id="{{$categoria->nombre}}" name="checkbox {{$categoria->nombre}}">
+                  @endif
                     <label class="form-check-label" for="{{$categoria->nombre}}">
                       {{$categoria->nombre}}
                     </label>
@@ -37,8 +42,8 @@
             <div class="py-2"> 
               <h4>Precio</h3>
               <div class="py-2"> 
-                <input type="text" name="precioMin" id="precioMin" placeholder="mínimo" style="width: 90px"> 
-                <input type="text" name="precioMax" id="precioMax" placeholder="máximo" style="width: 90px">
+                <input type="text" name="precioMin" id="precioMin" placeholder="mínimo" style="width: 90px" value="{{isset($precioMin)?$precioMin:null; }}"> 
+                <input type="text" name="precioMax" id="precioMax" placeholder="máximo" style="width: 90px" value="{{isset($precioMax)?$precioMax:null; }}">
               </div>
             </div>
             <div class="row py-1">

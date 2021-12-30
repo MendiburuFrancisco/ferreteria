@@ -40,11 +40,26 @@
     <link href="navbar.css" rel="stylesheet">
 </head> 
 
-
+@if (isset($filtroBuscador))
+  @include('nav-footer.nav',['buscador' => $filtroBuscador])  
+    
+@else
 @include('nav-footer.nav')
+@endif
+
+ 
+  @if (isset($categoriasSeleccionadas))
+  @include('tienda',[$arrayProductos,$categoriasSeleccionadas])
+      
+  @else
+  @include('tienda',$arrayProductos)
+  @endif
+ 
+ 
 
 
-@include('tienda',$arrayProductos)
+ 
+
 
 
 @include('nav-footer.footer')

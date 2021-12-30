@@ -1,4 +1,41 @@
 
+   <head>
+  
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <title>Inicio</title>
+
+     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbars/">  
+    <!-- SCRIPT PARA PODER OCUPAR LAS FUNCIONALIDADES DEL NAV-->
+    <!-- <script src="bootstrap-5.1.3-examples\assets\dist\js\bootstrap.bundle.min.js""></script> -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>  
+ 
+    <link href="navbar.css" rel="stylesheet">
+</head> 
+
+
 @if (Session::get('nombre') !== null && Session::get('nombre') == 'admin')
   <nav class="navbar navbar-expand-lg navbar-dark sticky-lg-top " aria-label="Third navbar example" style="background-color:#6279c8;">
     <div class="container-fluid col-md-10">
@@ -8,7 +45,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <form class="col-md-4" action="{{url('tienda/filtrar')}}" method="GET">
-        <input class="form-control" name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
+        <input class="form-control" value=""  name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
       </form>
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav me-auto  mb-sm-0">
@@ -18,6 +55,7 @@
             <li class="nav-item">
               <a class="nav-link active" href="{{url('tienda')}}">Editar Productos</a>
             </li>
+            
             <li class="nav-item position-relative">
               
               <a class="nav-link active " style="" href="{{url('pedidos')}}">Ver pedidos
@@ -65,7 +103,7 @@
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav me-auto mb-1 mb-sm-0">
           <form class="col-md-10" action="{{url('tienda/filtrar')}}" method="GET">
-            <input class="form-control" name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
+            <input class="form-control" value="{{ isset($buscador)?$buscador:null; }}" name="textoBuscador" type="text" placeholder="Buscar productos, marcas, categorias..." aria-label="Search">
           </form>
           <li class="nav-item ">
             <a class="nav-link active" aria-current="page" href="{{url('/')}}">Inicio</a>
@@ -73,10 +111,10 @@
           <li class="nav-item">
             <a class="nav-link active" href="{{url('tienda')}}">Tienda</a>
           </li>
-          <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Nosotros</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown03">
-              <!-- ACA DEBERÍAN GENERARSE POR DEFECTO TODAS LAS CATEGORIAS DISPONIBLES-->
+          <li class="nav-item">
+            <a class="nav-link active" href="{{url('nosotros')}}">Nosotros</a>
+             <!--<ul class="dropdown-menu" aria-labelledby="dropdown03">
+              ACA DEBERÍAN GENERARSE POR DEFECTO TODAS LAS CATEGORIAS DISPONIBLES
               <li>
                 <a class="dropdown-item" href="#">Baño</a>
               </li>
@@ -85,9 +123,9 @@
               </li>
               <li>
                 <a class="dropdown-item" href="#">Construcción</a>
-              </li>
-              <!-- CON UN FOR DEBERÍA PODERSE-->
-            </ul>
+              </li> 
+               
+            </ul>  -->
           </li>
         </ul>
         <ul class="navbar-nav me-0 mb-1 mb-sm-0"> 

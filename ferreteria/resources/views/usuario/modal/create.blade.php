@@ -8,7 +8,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{ __('Crear nuevo usuario') }}</h4>
+                    <h4 style="align-items:center" class="title">{{ ('Usuario') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -19,18 +19,15 @@
 
                     <div class="login-form" id="formulario">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputName" placeholder="Ingrese Usuario" name="user"/>
+                            <input type="text" class="form-control" id="inputName" placeholder="Ingrese Usuario" name="user"
+                              name="user" required autocomplete="user"/>
                         </div>
                         <div class="form-group">
                             
-                            <input type="password" class="form-control" id="inputPw" placeholder="Ingrese Contraseña" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"/>
+                            <input type="password" class="form-control" id="inputPw" placeholder="Ingrese Contraseña" 
+                             name="password" required autocomplete="current-password"/>
                         </div>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
+                              
                             <button href="{{ url ('inicio')}}" type="submit">Ingresar</button>
                             <p class="mensaje">No estas registrado? <a href="#">Crea una cuenta</a></p>
                     </div>
@@ -43,52 +40,42 @@
                     <div class="register-form" id="formulario">
 
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputName" placeholder="Ingrese su Nombre" name="name" required-autocomplete="name"/>
+                            <input type="text" class="form-control" id="inputName" placeholder="Ingrese su Nombre" 
+                            name="name" required-autocomplete="name"/>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputLastname" placeholder="Ingrese su Apellido" name="lastname" required-autocomplete="lastname"/>
+                            <input type="text" class="form-control" id="inputLastname" placeholder="Ingrese su Apellido" 
+                            name="lastname" required-autocomplete="lastname"/>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputUser" placeholder="Ingrese Usuario" @error('user') is-invalid @enderror" name="user" value="{{ old('user') }}" required autocomplete="user" autofocus/>
+                            <input type="text" class="form-control" id="inputUser" placeholder="Ingrese Usuario" 
+                            @error('user') is-invalid @enderror" name="user" value="{{ old('user') }}" required autocomplete="user" autofocus/>
                         </div>
-                                @error('user')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                               
                                 
                         <div class="form-group">
                             <input type="password" class="form-control" id="inputPw" placeholder="Ingrese Contraseña" name="password"/>
                         </div>
 
                         <div class="form-group">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese Email" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"/>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese Email"
+                             @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"/>
                         </div>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            
+                            
 
                         <div class="form-group">
-                            <input type="date" class="form-control" id="inputDate" placeholder="Ingrese Fecha de Nacimiento" @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date"/>
+                            <input type="date" class="form-control" id="inputDate" placeholder="Ingrese Fecha de Nacimiento" 
+                            @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date"/>
                         </div>
-                            @error('date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                           
 
                         <div class="form-group">
-                            <input type="tel" class="form-control" id="inputTel" placeholder="Ingrese Telefono de Contacto" @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel"/>
+                            <input type="tel" class="form-control" id="inputTel" placeholder="Ingrese Telefono de Contacto" 
+                            @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel"/>
                         </div>
-                            @error('tel')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
 
                         <button href="#" type="submit">Crear</button>
                         <p class="mensaje2">Ya estas registrado? <a href="#">Inicia Sesion</a></p>

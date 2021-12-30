@@ -8,9 +8,7 @@
    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbars/">  
   <!-- SCRIPT PARA PODER OCUPAR LAS FUNCIONALIDADES DEL NAV-->
   <!-- <script src="bootstrap-5.1.3-examples\assets\dist\js\bootstrap.bundle.min.js""></script> -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script src="{{ asset('js/app.js') }}" defer></script>
-  
+  <link href="../resources/css/cuenta.css" rel="stylesheet">
 
   <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,12 +29,19 @@
     }
   </style>  
       <style>
+        a{
+        text-decoration: none !important;
+       }
+
+      i{
+        font-size:18px;
+      }
         .container-1 {
         padding-top: 8rem;
         padding-bottom: 6rem;
         }
     
-        i:focus, i:hover, ped:focus, ped:hover, di:focus, di:hover, det:focus, det:hover, a:hover, a:focus{
+        i:focus, i:hover{
             color:#fc5f5f;
             text-decoration: none;
         }
@@ -59,12 +64,12 @@
             margin: auto auto auto;
           }
     
-          #inicio, #pedidos, #direcciones, #detalles, #finalizar{
+          #inicio, #pedidos, #detalles, #finalizar{
             background-color: aliceblue;
             font-family: 'Poppins', sans-serif;
             font-style:normal;
             display: block;
-            border: solid #fc5f5f 0.5px;
+            border: solid #d4d3d3 0.5px;
             padding: 10px 0 10px;
             margin: 5px auto;
           }
@@ -72,27 +77,20 @@
           .col-sm-8{
             display: inline-block;
             overflow: hidden;
+            padding-top:15px;
           }
     
           .col-sm-8 label{
             font-weight:bold ;
             display: block;
+            font-size:17px;
           }
     
           .col-sm-8 form .required {
             color: red;
             border: 0;
-            display: block;
           }
     
-          .col-sm-8 .col p {
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-          }
-    
-    
-    
-         
     </style>
     
 
@@ -110,33 +108,57 @@
          <!-- Inicio pedidos direcciones detalles de cuenta finalizar sesion-->
         @include('usuario.menu')
 
-          <div class="col-sm-8">
-            <form action= " " method="POST" class= "inline-form">
-              <div class='row'>
-                <div class='col-sm-5 form-group'>
-                  <label> Nombre <span class='required'>*</span></label>
-                  <input  id='nombre' type= "text" value='{{ Session::reflash('nombre') }}' readonly onmousedown="return false;" />
+
+          <div class="col">
+            <section class="container p-5 me-5 shadow">            
+              <form action= "{{url('sesion/guardarCambios')}}" method="POST" >
+                @csrf
+                {{ @method_field('PATCH') }}
+                <div class='row'>
+                  <div class='col-sm-5 form-group'>
+                    <label> Nombre</label>
+                    <input class="form-control" type= "text" name="nombre" id="nombre" value='{{ $cliente ->nombre }}'  />
+                  </div>
+  
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Apellido </label>
+                    <input  type= "text" class="form-control" name="apellido" id="apellido" value= '{{ $cliente ->apellido }}'
+                     />
+                  </div>
+                </div>
+  
+                <div class='row'>
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Usuario</label>
+                    <input disabled class="form-control" type= "text"  name="usuario" id="usuario" value= '{{ $cliente ->usuario  }}' />
+                  </div>
+  
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Email </label>
+                    <input class="form-control" type= "text" name="email" id="email"  value= '{{ $cliente ->email  }}' />
+                  </div>
+                  
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Fecha de Nacimiento</label>
+                    <input class="form-control" type= "date" name="fecha_nacimiento" id="fecha_nacimiento" value= '{{ $cliente ->fecha_nacimiento  }}' />
+                  </div>
+
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Telefono</label>
+                    <input class="form-control" type= "text" name="telefono" id="telefono" value= '{{ $cliente ->telefono  }}' />
+                  </div>
+
                 </div>
 
-                <div class= 'col-sm-5 form-group'> 
-                  <label> Apellido <span class="required">*</span></label>
-                  <input id='apellido' type= "text" value= '{{ Session::reflash('apellido') }}' readonly onmousedown="return false;" />
+                      
+                <div class="row d-flex justify-content-end align-items-center">
+                  
+                  <button class="btn btn-danger m-1 w-auto" >Cancelar</button>
+                  <button class="btn btn-primary m-1 w-auto" type="submit">Guardar cambios</button>
                 </div>
-              </div>
-
-              <div class='row'>
-                <div class= 'col-sm-5 form-group'> 
-                  <label> Usuario <span class="required">*</span></label>
-                  <input  type= "text" value= '{{ Session::reflash('usuario') }}' readonly onmousedown="return false;" />
-                </div>
-
-                <div class= 'col-sm-5 form-group'> 
-                  <label> Email <span class="required">*</span></label>
-                  <input type= "text" value= '{{ Session::reflash('email') }}' readonly onmousedown="return false;" />
-                </div>
-              </div>
-
-            </form>
+                
+              </form>
+            </section>
           </div>   
     </div>
     </html>
