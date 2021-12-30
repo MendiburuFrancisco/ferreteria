@@ -127,14 +127,18 @@ class PedidosController extends Controller
      */
     public function eliminar($codigo)
     {
-       
+        
+       // $Compra = DB::select("SELECT * FROM compra WHERE id_compra = ".$codigo);
+        $Compra = DB::table('compra')->where('id_compra','=',$codigo)->get('*')->firstOrFail();
+        $idCliente = Session::get('id');
+        
 
-        if(Session::get('nombre')!= null && Session::get('nombre') == 'admin')
+        if( $idCliente == $Compra->id_cliente || (Session::get('nombre')!= null && Session::get('nombre') == 'admin'))
         {
             DB::table('detalle_compra')->where('id_compra','=', $codigo)->delete();
             DB::table('compra')->where('id_compra','=', $codigo)->delete();
     
-            return redirect('/pedidos');
+            return back();
 
         } else
         {
@@ -152,6 +156,24 @@ class PedidosController extends Controller
             DB::select('call modificarPedidoRealizado('.Session::get('idCompra'). ','. $codigo.','.$cantidad.')');
                
             return back();
+        } else
+        {
+            return view('error_permisos');
+        }
+    }
+
+    public function finalizar(Request $request)
+    {
+        if(Session::get('nombre')!= null && Session::get('nombre') ==  'admin' )
+        {
+        
+            $idCompra= Session::get('idCompra');
+
+            DB::table('compra')->where('id_compra','=',$idCompra)->update([
+                'estado' => 'finalizada'
+            ]);
+               
+            return url('/tienda');
         } else
         {
             return view('error_permisos');

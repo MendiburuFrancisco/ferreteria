@@ -99,9 +99,9 @@
     
                         @break
                     @case('finalizar')
-                    <form action="{{ url('/carrito/finalizarPedido') }}" method="get">
+                    <form action="{{ url('/pedidos/finalizarPedido') }}" method="post">
                       @csrf
-
+                        {{ @method_field('PATCH')}}
                       <div class="d-grid gap-2">
 
                           <button class="btn btn-primary" type="submit">Finalizar pedido</button>

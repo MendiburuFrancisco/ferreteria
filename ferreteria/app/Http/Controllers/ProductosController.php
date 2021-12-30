@@ -29,26 +29,47 @@ class ProductosController extends Controller
  
     public function create()
     {
-        return redirect('/tienda');
+        if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+        {
+
+            return view('producto.create');
+        }
+        else
+        {
+            return view('error_permisos');
+        }
+
     }
 
   
     public function store(Request $request)
     {
-        $productoNuevo = request()->except('_token');        
+        if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+        {
 
-        if($request -> hasFile('imagen')){
-            $productoNuevo['imagen']=$request->file('imagen') ->store('uploads','public');
+            $productoNuevo = request()->except('_token');        
+
+            if($request -> hasFile('imagen')){
+                $productoNuevo['imagen']=$request->file('imagen') ->store('uploads','public');
+            }
+            
+            DB::table('producto')->insert($productoNuevo);  
+
+            return redirect('producto');
+
         }
-        
-        DB::table('producto')->insert($productoNuevo);  
+        else
+        {
+            return view('error_permisos');
+        }
 
-        return redirect('producto')->with('mensaje','Mensaje agregado con exito');
+
          
     }
  
     public function show($id)
     {
+
         $producto = DB::table('producto')->where('codigo','=',$id)->get('*')->firstOrFail();
   
         $productos = DB::select("SELECT * FROM producto WHERE categoria LIKE '".$producto->categoria."'");
@@ -66,49 +87,78 @@ class ProductosController extends Controller
   
     public function edit($id)
     {
-        $producto = DB::table('producto')->where('codigo','=',$id)->get('*');
-        $producto = $producto->first(); 
-        return view('producto.edit')->with('producto',$producto);
+        if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+        {
+
+            $producto = DB::table('producto')->where('codigo','=',$id)->get('*');
+            $producto = $producto->first(); 
+            return view('producto.edit')->with('producto',$producto);
+        }
+        else
+        {
+            return view('error_permisos');
+        }
+
         
     }
 
  
     public function update(Request $request, $codigo)
-    {//"Codigo","Nombre","Marca","Stock","precio","imagen","Descripcion","Categoria"
-         $datosProducto = $request->except(['_method','_token']);
+    { 
+        if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+        {
+            $datosProducto = $request->except(['_method','_token']);
 
-         if($request -> hasFile('imagen')){
-            if( $request->file('imagen') != 'uploads/error-imagen.png') {
-                Storage::delete('public/'.$datosProducto['imagen']);
+            if($request -> hasFile('imagen')){
+                if( $request->file('imagen') != 'uploads/error-imagen.png') {
+                    Storage::delete('public/'.$datosProducto['imagen']);
+                }
+                $datosProducto['imagen']=$request->file('imagen') ->store('uploads','public');
             }
-            $datosProducto['imagen']=$request->file('imagen') ->store('uploads','public');
+
+            DB::table('producto')->where('codigo','=',$codigo)->update($datosProducto);
+            
+            return redirect('/tienda');
+        }
+        else
+        {
+            return view('error_permisos');
         }
 
-         DB::table('producto')->where('codigo','=',$codigo)->update($datosProducto);
-        
-         return redirect('/tienda');
       
     }
 
    
     public function destroy($id)
     {
-        $producto = DB::table('producto')->where('codigo','=',$id)->get('*');
-        $producto = $producto->first(); 
+        if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+        {
+                
+            $producto = DB::table('producto')->where('codigo','=',$id)->get('*');
+            $producto = $producto->first(); 
 
-        if(Storage::delete('public/'.$producto->imagen)){
-            DB::delete('DELETE FROM producto WHERE codigo ='.$id);
+            if(Storage::delete('public/'.$producto->imagen)){
+                DB::delete('DELETE FROM producto WHERE codigo ='.$id);
+            }  
+            return redirect('producto');
         }
-
-        
-
-        return redirect('producto');
+        else
+        {
+            return view('error_permisos');
+        }
     }
 
     public function cambiarEstado($codigo)
     {
-        DB::SELECT('call cambiarEstadoProducto('.$codigo.')');
+        if(Session::get('nombre') != null && Session::get('nombre') == 'admin')
+        { 
+            DB::SELECT('call cambiarEstadoProducto('.$codigo.')');
 
-        return redirect('/tienda');
+            return redirect('/tienda');
+        }
+        else
+        {
+            return view('error_permisos');
+        } 
     }
 }

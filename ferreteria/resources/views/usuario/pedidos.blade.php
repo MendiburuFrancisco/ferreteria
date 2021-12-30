@@ -115,14 +115,15 @@
             block-size: 1%;
         }
 
-        .parr, #bot-ped {
+        .parr,
+        #bot-ped {
             font-size: 19px;
         }
 
         #main {
-        background-color: aliceblue;
-        border: 0.2px solid #d4d3d3;
-        margin-right: 1rem;
+       
+            border: 0.2px solid #d4d3d3;
+            margin-right: 1rem;
         }
 
         th {
@@ -131,33 +132,32 @@
         }
 
         #otro {
-            display: flex!important;
+            display: flex !important;
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
             padding-top: 25px;
             background-color: aliceblue;
         }
-        #before{
-            display: block!important;
+
+        #before {
+            display: block !important;
             align-self: center;
             margin-bottom: 5.4%;
         }
-        #parr-flex{
-            display: flex!important;
+
+        #parr-flex {
+            display: flex !important;
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
             padding-top: 25px;
         }
-        #pedido{
+
+        #pedido {
             font-size: 18px;
             font-family: 'Poppins', sans-serif;
         }
-       
-        
-       
-       
 
     </style>
 
@@ -165,49 +165,109 @@
 </head>
 
 @include('nav-footer.nav')
-<div class="container-1 row " id="op">
+<div class="container-1 row" id="op">
     @include('usuario.menu')
 
-    @if( $pedidos != null && count($pedidos) > 0)
+    
+    <div class="col-sm-8 p-5 me-5 shadow" id="main">
+        
+        <h3>Pedidos en curso</h3>
+        
+        @if( $pedidos != null && count($pedidos) > 0)
+            <table class="table table-hover my-3">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
 
-    <div class="col-sm-8" id="main">
-            <ul>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha y Hora</th>
+                        <th class="text text-end" scope="col">Total</th>
+                        <th class="text text-center" colspan="2" scope="col"> Opciones </th>
+                        <!-- <th scope="col"> </th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($pedidos as $pedido)
 
-                <ol class="list-group list-group-flush">
 
-                    @foreach($pedidos as $item)
+                        <tr>
+                            <th scope="row">{{ $pedido->id_compra }}</th>
 
-                        <a class= "d-none">{{$compra = $item->id_compra}}</a>
+                            <td>{{ $pedido->estado }} </td>
+                            <td>{{ $pedido->fecha_hora }} </td>
+                            <td class="text text-end">$ {{ $pedido->total }} </td>
+                            <td class="text text-end">
+                                <a class="btn btn-primary"
+                                    href="{{ url('/sesion/detallecompra/'. $pedido->id_compra) }}">
+                                    <i class="bi bi-bag"></i> Ver
+                                </a>
+                            </td>
+                            <td>
 
-                        @if($compra ==  $item->id_compra)
+                                <a class="btn btn-danger" href="{{url('/pedidos/eliminar/'.$pedido->id_compra)}} ">
+                                    <i class="bi bi-trash"></i> Cancelar pedido
+                                </a>
 
-                            <li class="list-group-item d-none" id="otro">
-                                <li id="otro" > <a id="pedido">Pedido numero: {{$compra = $item->id_compra}} </a>
-                                <a
-                                class="btn btn-primary rounded-pill" 
-                                href = "{{url('/sesion/detallecompra/'. $item->id_compra)}}"> Ver pedido </a>
-                                </li>
-                            </li>
-                            
-                        @endif
+                            </td>
+                        </tr>
 
                     @endforeach
+                </tbody>
+            </table>
 
-                </ol>
-            </ul>
-    </div>
-@else
-    <div  style="font-family:'Poppins',sans-serif; background-color: aliceblue;
-    font-size: 16px; padding-left:0px;
-            padding-right:0px; height: 7rem; justify-content:space-around; " class="col-sm-6 d-block" id="before">
-        <div class="div-head col"></div>
-        <div class= "d-flex" id="parr-flex">
-            <a   class="parr text-center">No se ha hecho ningún pedido todavía. </a>
+            @else
+            <div style="font-family:'Poppins',sans-serif; background-color: aliceblue;
+        font-size: 16px; padding-left:0px;
+                padding-right:0px; height: 7rem; justify-content:space-around; " class="col d-block" id="before">
+                <div class="div-head col"></div>
+                <div class="d-flex" id="parr-flex">
+                    <a class="parr text-center">No se ha hecho ningún pedido todavía. </a>
+    
+                    <a class="col-xl-5 btn-info btn" href="{{ url ('tienda') }}" id="bot-ped">
+                        Explorar los productos </a>
+                </div>
+    
+            </div>
+            @endif
 
-            <a class="col-xl-5 btn-info btn" href="{{ url ('tienda') }}" id="bot-ped">
-                Explorar los productos </a>
+            <h3 class=" mt-3">Pedidos finalizados</h3>
+          
+            <table class="table table-hover  my-3">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha y Hora</th>
+                        <th class="text text-end" scope="col">Total</th>
+                        <th class="text text-center" colspan="2" scope="col"> Opciones </th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($pedidosFinalizados as $pedido)
+
+
+                        <tr>
+                            <th scope="row">{{ $pedido->id_compra }}</th>
+
+                            <td>{{ $pedido->estado }} </td>
+                            <td>{{ $pedido->fecha_hora }} </td>
+                            <td class="text text-end">$ {{ $pedido->total }} </td>
+                            <td class="text text-end">
+                                <a class="btn btn-primary"
+                                    href="{{ url('/sesion/detallecompra/'. $pedido->id_compra) }}">
+                                    <i class="bi bi-bag"></i> Ver
+                                </a>
+                            </td>
+                    
+                        </tr>
+
+                    @endforeach
+                </tbody>
+            </table>
+
+
         </div>
 
-    </div>
 </div>
-@endif

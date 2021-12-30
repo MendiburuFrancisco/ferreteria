@@ -119,7 +119,8 @@
             
             <div class="col-sm-8"> 
               <div class = "col" id="parrafo"> 
-                <p>Hola <span> {{(Session::get('usuario'))}} </span> (¿No eres <span> {{(Session::get('usuario'))}}</span>? 
+                <p>¡Hola bienvenido! <span> 
+                  {{(Session::get('usuario'))}} </span> (¿No eres <span> {{(Session::get('usuario'))}}</span>? 
                   <a id="ped" href ="{{url( '/sesion/guardarCambios' )}}"> Cerra Sesión </a> ) </p>
                 <ul>
                   <li><p>Desde el escritorio de tu cuenta puedes ver tus <a id="ped" href = "{{url( '/sesion/pedidos' )}}">pedidos recientes</a>,

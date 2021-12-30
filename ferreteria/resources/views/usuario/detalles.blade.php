@@ -108,36 +108,57 @@
          <!-- Inicio pedidos direcciones detalles de cuenta finalizar sesion-->
         @include('usuario.menu')
 
-          <div class="col-sm-8">
-            <form action= " " method="POST" >
-              <div class='row'>
-                <div class='col-sm-5 form-group'>
-                  <label> Nombre <span class='required' aria-hidden="true">*</span></label>
-                  <input class="form-control" type= "text" value='{{ Session::get('nombre') }}' 
-                  readonly onmousedown="return false;" />
+
+          <div class="col">
+            <section class="container p-5 me-5 shadow">            
+              <form action= "{{url('sesion/guardarCambios')}}" method="POST" >
+                @csrf
+                {{ @method_field('PATCH') }}
+                <div class='row'>
+                  <div class='col-sm-5 form-group'>
+                    <label> Nombre</label>
+                    <input class="form-control" type= "text" name="nombre" id="nombre" value='{{ $cliente ->nombre }}'  />
+                  </div>
+  
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Apellido </label>
+                    <input  type= "text" class="form-control" name="apellido" id="apellido" value= '{{ $cliente ->apellido }}'
+                     />
+                  </div>
+                </div>
+  
+                <div class='row'>
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Usuario</label>
+                    <input disabled class="form-control" type= "text"  name="usuario" id="usuario" value= '{{ $cliente ->usuario  }}' />
+                  </div>
+  
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Email </label>
+                    <input class="form-control" type= "text" name="email" id="email"  value= '{{ $cliente ->email  }}' />
+                  </div>
+                  
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Fecha de Nacimiento</label>
+                    <input class="form-control" type= "date" name="fecha_nacimiento" id="fecha_nacimiento" value= '{{ $cliente ->fecha_nacimiento  }}' />
+                  </div>
+
+                  <div class= 'col-sm-5 form-group'> 
+                    <label> Telefono</label>
+                    <input class="form-control" type= "text" name="telefono" id="telefono" value= '{{ $cliente ->telefono  }}' />
+                  </div>
+
                 </div>
 
-                <div class= 'col-sm-5 form-group'> 
-                  <label> Apellido <span class="required">*</span></label>
-                  <input  type= "text" class="form-control"  value= '{{ Session::get('apellido') }}'
-                   readonly onmousedown="return false;" />
+                      
+                <div class="row d-flex justify-content-end align-items-center">
+                  
+                  <button class="btn btn-danger m-1 w-auto" >Cancelar</button>
+                  <button class="btn btn-primary m-1 w-auto" type="submit">Guardar cambios</button>
                 </div>
-              </div>
-
-              <div class='row'>
-                <div class= 'col-sm-5 form-group'> 
-                  <label> Usuario <span class="required">*</span></label>
-                  <input  class="form-control" type= "text" value= '{{ Session::get('usuario') }}'
-                   readonly onmousedown="return false;" />
-                </div>
-
-                <div class= 'col-sm-5 form-group'> 
-                  <label> Email <span class="required">*</span></label>
-                  <input class="form-control" type= "text" value= '{{ Session::get('email') }}'
-                   readonly onmousedown="return false;" />
-                </div>
-              </div>
-            </form>
+                
+              </form>
+            </section>
           </div>   
     </div>
     </html>
