@@ -24,7 +24,7 @@ jobs:
         git config --global user.name "Francisco"
         git config --global user.email "franmendi.fm@gmail.com"
         git clone https://github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
-        mv ../readme.md mendiburufrancisco.github.io/assets/md/
+        mv ./readme.md mendiburufrancisco.github.io/assets/md/
         cd mendiburufrancisco.github.io/assets/md/
         rm ferreteria.md
         mv readme.md ferreteria.md
