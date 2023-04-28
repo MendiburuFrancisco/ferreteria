@@ -3,7 +3,7 @@ name: Actualizar archivo en otro repositorio
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - readme.md
   pull_request:
