@@ -61,4 +61,4 @@ Debido al poco tiempo disponible, no pude reallizar un caso de estudio completo 
 
 > Imagen carrousel de wireframes
 
-Nota: No todos los wireframes para cada una de las pantallas fueron realizados.    
+Nota: No todos los wireframes para cada una de las pantallas fueron realizados.     
