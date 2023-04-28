@@ -21,9 +21,10 @@ jobs:
 
     - name: Actualizar archivo
       run: |
-        git config --global user.name "Francisco"
-        git config --global user.email "franmendi.fm@gmail.com"
-        git clone https://github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
+        # git config --global user.name "MendiburuFrancisco"
+        # git config --global user.email "franmendi.fm@gmail.com"
+        # git clone    https://github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
+        git clone    git@github.com:MendiburuFrancisco/mendiburufrancisco.github.io.git
         mv ./readme.md mendiburufrancisco.github.io/assets/md/
         cd mendiburufrancisco.github.io/assets/md/
         rm ferreteria.md
