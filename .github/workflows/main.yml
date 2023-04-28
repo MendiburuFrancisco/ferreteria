@@ -32,7 +32,7 @@ jobs:
         mv readme.md ferreteria.md
         git add .
         git commit -m "Actualización automática del archivo"
-        git push origin main
+        git push https://${GIT_TOKEN}@github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
     # - name: Actualizar archivo
     #   run: |
     #     # git config --global user.name "MendiburuFrancisco"
