@@ -19,16 +19,32 @@ jobs:
     - name: Checkout código
       uses: actions/checkout@v2
 
-    - name: Actualizar archivo
-      run: |
-        # git config --global user.name "MendiburuFrancisco"
-        # git config --global user.email "franmendi.fm@gmail.com"
-        # git clone    https://github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
-        git clone    git@github.com:MendiburuFrancisco/mendiburufrancisco.github.io.git
-        mv ./readme.md mendiburufrancisco.github.io/assets/md/
-        cd mendiburufrancisco.github.io/assets/md/
-        rm ferreteria.md
-        mv readme.md ferreteria.md
-        git add .
-        git commit -m "Actualización automática del archivo"
-        git push
+- name: Actualizar archivo
+  env:
+    GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+  run: |
+    git config --global user.name "MendiburuFrancisco"
+    git config --global user.email "franmendi.fm@gmail.com"
+    git clone https://github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
+    mv ../readme.md mendiburufrancisco.github.io/assets/md/
+    cd mendiburufrancisco.github.io/assets/md/
+    rm ferreteria.md
+    mv readme.md ferreteria.md
+    git add .
+    git commit -m "Actualización automática del archivo"
+    git push https://${GIT_TOKEN}@github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
+   
+   
+    # - name: Actualizar archivo
+    #   run: |
+    #     # git config --global user.name "MendiburuFrancisco"
+    #     # git config --global user.email "franmendi.fm@gmail.com"
+    #     # git clone    https://github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
+    #     git clone    git@github.com:MendiburuFrancisco/mendiburufrancisco.github.io.git
+    #     mv ./readme.md mendiburufrancisco.github.io/assets/md/
+    #     cd mendiburufrancisco.github.io/assets/md/
+    #     rm ferreteria.md
+    #     mv readme.md ferreteria.md
+    #     git add .
+    #     git commit -m "Actualización automática del archivo"
+    #     git push
