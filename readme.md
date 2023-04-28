@@ -63,4 +63,4 @@ Debido al poco tiempo disponible, no pude reallizar un caso de estudio completo 
 
 Nota: No todos los wireframes para cada una de las pantallas fueron realizados.
 
- 
+  
