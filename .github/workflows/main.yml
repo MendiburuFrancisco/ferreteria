@@ -1,0 +1,31 @@
+name: Actualizar archivo en otro repositorio
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - readme.md
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - readme.md
+
+jobs:
+  actualizar-archivo:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Actualizar archivo
+      run: |
+        git config --global user.name "Francisco"
+        git config --global user.email "franmendi.fm@gmail.com"
+        git clone https://github.com/MendiburuFrancisco/mendiburufrancisco.github.io.git
+        cd mendiburufrancisco.github.io/assets/md/
+        cp ../readme.md .
+        git add .
+        git commit -m "Actualización automática del archivo"
+        git push
