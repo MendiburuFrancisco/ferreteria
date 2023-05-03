@@ -57,12 +57,12 @@ A partir de eso, pudimos realizar la base de datos y luego de varios intentos, q
 
 ### Base de datos
 
-> Imagen de la ultima base de datos 
+![Imagen de la base de datos](./Imagenes/database-final.png)
 
 # Diseño UI
 
 Debido al poco tiempo disponible, no pude reallizar un caso de estudio completo para mejorar la UX.  Sin embargo, comencé realizando los wireframes de alto nivel basándome en MercadoLibre y otras páginas dedicadas al mismo rubro.
 
-> Imagen carrousel de wireframes
+![Imagen carrousel de wireframes](./Imagenes/Dise%C3%B1o%20UX-UI/browser-mockup-home.png)
 
 Nota: No todos los wireframes para cada una de las pantallas fueron realizados.         
