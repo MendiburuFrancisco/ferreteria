@@ -17,6 +17,10 @@ Este proyecto, fue realizado con el propósito de finalizar el curso de Desarrol
 # Solución 
 [GitHub - MendiburuFrancisco/ferreteria](https://github.com/MendiburuFrancisco/ferreteria)
 
+[![Explicación de la resolución del problema en vídeo](https://img.youtube.com/vi/z9URpgMfLus/0.jpg)](https://www.youtube.com/watch?v=z9URpgMfLus)
+
+
+
 # Problema
 
 Para situarnos mejor y entender el contexto del problema, se realizó una pequeña historia que nos permite comprender mejor cuáles son las necesidades de nuestro cliente y encontrar los requerimientos necesarios:
